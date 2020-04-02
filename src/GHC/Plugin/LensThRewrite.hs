@@ -1,4 +1,5 @@
 {-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE CPP             #-}
 {-# LANGUAGE ViewPatterns    #-}
 {-# LANGUAGE BangPatterns    #-}
 --------------------------------------------------------------------------------
@@ -209,7 +210,11 @@ genLensCall lensInnerType (fieldName, fieldType) =
                (hsPar
                  $ hsLam
                  $ matchGroup
+#if MIN_VERSION_base (4,13,0)
                  [ lambdaMatch [ varPat "r", varPat "f" ] $
+#else
+                 [ lambdaMatch [ emptyL (varPat "r"), emptyL (varPat "f") ] $
+#endif
                    grhss
                    [ grhs $ recordUpd (hsVar "r")
                      [ hsRecUpdField fieldName (hsVar "f")
