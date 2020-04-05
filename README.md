@@ -50,6 +50,13 @@ This can be a non-starter for many projects.
 
 Only `makeLenses` is supported.
 
+### Preprocessor
+
+It is possible to use the executable bundled with this library as a pre-processor.
+
+Add `{-# options_ghc -F -Fpgm=lens-th-rewrite-pp #-}`
+
 ### Long term
 
 GHC should split up Template Haskell into pure and impure variants. Allowing pure TH code to be executed on the host, and impure on the target.
+

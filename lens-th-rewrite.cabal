@@ -13,6 +13,28 @@ category:            Data
 build-type:          Simple
 extra-source-files:  CHANGELOG.md
 
+executable test
+  main-is:
+    Main.hs
+  hs-source-dirs:
+    exe
+  ghc-options:
+    -fplugin=GHC.Plugin.LensThRewrite
+  build-depends:
+    base < 5, lens-th-rewrite, lens
+  default-language:
+    Haskell2010
+
+executable lens-th-rewrite-pp
+  main-is:
+    Main.hs
+  hs-source-dirs:
+    pp
+  build-depends:
+    base < 5, lens-th-rewrite, ghc, ghc-exactprint
+  default-language:
+    Haskell2010
+
 library
   exposed-modules:
     GHC.Plugin.LensThRewrite

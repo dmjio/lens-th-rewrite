@@ -14,7 +14,7 @@
 -- GHC Plugin to rewrite makeLenses call into pure functions.
 --
 --------------------------------------------------------------------------------
-module GHC.Plugin.LensThRewrite ( plugin ) where
+module GHC.Plugin.LensThRewrite ( plugin, rewriteModule ) where
 
 import Control.Arrow
 import Control.Lens
@@ -32,8 +32,6 @@ import RdrName
 import TcEvidence
 import Var
 
-import System.IO.Unsafe
-
 -- | Lens rewrite plugin.
 plugin :: Plugin
 plugin
@@ -42,14 +40,20 @@ plugin
   , pluginRecompile = purePlugin
   }
 
+rewriteModule
+   :: HsModule GhcPs
+   -> HsModule GhcPs
+rewriteModule module'
+  = module' & decls %~ concatMap (modifyDecls module')
+
 rewriteMakeLenses
    :: HsParsedModule
    -> Hsc HsParsedModule
-rewriteMakeLenses parsed = do
---  liftIO $ print "Rewriting makeLenses to use lens"
-  pure $ parsed
-       & moduleDecls
-       %~ concatMap (modifyDecls (parsed ^. (hsMod . located)))
+rewriteMakeLenses parsed
+  = pure
+  $ parsed
+  & moduleDecls
+  %~ concatMap (modifyDecls (parsed ^. (hsMod . located)))
 
 parsedModule :: Lens' HsParsedModule (Located (HsModule GhcPs))
 parsedModule = lens hpm_module $ \r f -> r { hpm_module = f }
@@ -113,14 +117,6 @@ getMakeLensesSplices _ = []
 
 mkVar :: String -> HsExpr GhcPs
 mkVar x = HsVar NoExt (mkName x)
-
--- | test
--- main :: IO ()
--- main = do
---   Right (_, L _ s) <- parseModule "Main.hs"
---   putStrLn $ showSDocUnsafe (showAstData BlankSrcSpan s)
---   let n = s & decls %~ concatMap (modifyDecls s)
---   putStrLn $ showSDocUnsafe (ppr n)
 
 type FieldName = String
 type TypeName = String
