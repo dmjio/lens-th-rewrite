@@ -1,7 +1,7 @@
 cabal-version:       >=1.10
 name:                lens-th-rewrite
 version:             0.3.0.0
-synopsis:            Rewrites Template Haskell splices using the API
+synopsis:            Rewrites Template Haskell splices using the GHC API
 description:         A GHC plugin to perform source-to-source transformation on parsed Haskell, used to manually inline Template Haskell calls for lens.
 bug-reports:         https://github.com/dmjio/lens-th-rewrite/issues
 license:             BSD3
