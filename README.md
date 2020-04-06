@@ -48,7 +48,7 @@ This can be a non-starter for many projects.
 
 ### Limitations
 
-Only `makeLenses` is supported.
+Only `makeLenses` is supported. Also, you must define your data type in the same module `makeLenses` is used.
 
 ### Preprocessor
 
