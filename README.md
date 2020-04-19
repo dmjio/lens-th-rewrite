@@ -54,7 +54,7 @@ Only `makeLenses` is supported. Also, you must define your data type in the same
 
 It is possible to use the executable bundled with this library as a pre-processor.
 
-Add `{-# options_ghc -F -Fpgm=lens-th-rewrite-pp #-}`
+Add `{-# options_ghc -F -pgmF=lens-th-rewrite-pp #-}`
 
 ### Long term
 
