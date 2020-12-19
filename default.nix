@@ -35,4 +35,5 @@ let
   callARM = ghcARM.callCabal2nix;
   preprocessor = with pkgs.haskell.lib; justStaticExecutables (call "lens-th-rewrite" ./. {});
 in
-  preprocessor
+  with pkgs.haskell.lib;
+  addBuildTool (callARM "test" ./test {}) preprocessor
