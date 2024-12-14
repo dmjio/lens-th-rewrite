@@ -7,7 +7,7 @@ bug-reports:         https://github.com/dmjio/lens-th-rewrite/issues
 license:             BSD3
 license-file:        LICENSE
 author:              David Johnson
-maintainer:          djohnson.m@gmail.com
+maintainer:          code@dmj.io
 copyright:           David Johnson (c) 2020
 category:            Data
 build-type:          Simple

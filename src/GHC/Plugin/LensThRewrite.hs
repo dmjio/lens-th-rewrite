@@ -7,7 +7,7 @@
 -- Module      : GHC.Plugin.LensThRewrite
 -- Copyright   : (c) 2020 David Johnson
 -- License     : All Rights Reserved
--- Maintainer  : David Johnson <djohnson.m@gmail.com>
+-- Maintainer  : David Johnson <code@dmj.io>
 -- Stability   : Experimental
 -- Portability : GHC
 --
